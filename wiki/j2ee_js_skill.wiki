@@ -104,6 +104,20 @@ function autoHeight(obj){
 }
 
 
+//** 弹出新窗口 并全屏 **//
+function openNew(url){
+	var screenWidth = screen.availWidth, screenHeight = screen.availHeight;
+	var sFeathers = "fullscreen=yes,menubar=no,scrollbars=no,toolbar=no,status=no,location=no";
+	var win = open(url,'_blank',sFeathers);
+	if(win){
+        win.resizeTo(screenWidth,screenHeight);
+        win.outerWidth = screenWidth;
+        win.outerHeight = screenHeight;
+        win.moveTo(0,0);
+    }
+}
+
+
 /** 解决session过期跳转到登陆页面并跳出iframe框架 **//
 在你想控制跳转的页面，比如login.jsp中的<head>与</head>之间加入以下代码： 
 <script> if (window != top)  top.location.href = location.href; </script> 
