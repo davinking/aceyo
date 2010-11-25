@@ -3,7 +3,7 @@
 
 /*************************************************** 以下是js前台操作相关方法 ************************************************************/
 
-
+{{{
 //** 对 serializeArray() 序列号方法详细解释 **//
 1.HTML部分: <input type="text" name="name" value="John Doe" /><br /> <input type="text" name="url" value="http://www.example.com" />
 2.serializ() 方法是用来将表单中的值编码成一个字符串,格式为: name=John+Doe&url=http%3A%2F%2Fwww.example.com .
@@ -256,3 +256,5 @@ function mobileCheck(){
 	else
 		countfield.value = maxlimit - field.value.length;
   }
+
+}}}
