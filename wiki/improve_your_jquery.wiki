@@ -46,7 +46,7 @@ Google Code上已经托管了多种JavaScript类库，从Google Code上加载jQu
 </script>  
 或者，你能够直接引用JS:
 }}}
-<script src="http:\\ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+`<script src="http:\\ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>`
 {{{
 这里有详细的用法说明
 
