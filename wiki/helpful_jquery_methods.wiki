@@ -1,7 +1,7 @@
 #labels 20个你应该经常使用的jQuery方法,jquery提高篇
 ===你已经玩jQuery一段时间了，你开始掌握使用它的窍门了，并且，你真的很喜欢它。那么你是否准备着把你的jQuery知识提高一个档次？现在，我将会展示二十个你可能从没见过的函数和特性。===
-# 分类：jQuery
-# 难度：适中
+*分类：jQuery
+*难度：适中
 {{{
 1, after()/before()
 　　有时候，你想往DOM中插入一些东西，但你却找不到好的方法去实现。append()或者prepend()不会有什么作用，并且你不想增加额外的容器和ID。那么，这两个函数可能正是你需要的。它们使你可以把新元素插入到DOM的另一个元素的前面或者后面；也就是说，新元素和旧元素是相邻的。
@@ -10,13 +10,11 @@ $('#child').after($('<p />')).text('This becomes a sibling of #child'));<b
 　　如果你想把一个正在在处理的元素插入，也可以使用这两个函数：
 $('<p>I\'ll be a sibling of #child</p>').insertAfter($('#child'));
 
-
 2, change()
 　　change()方法是一个事件处理器，就好像click()或者hover()那样。这个change事件是专为文本框（textarea）、文本输入（input）和选择组合框（select）而设的；当目标元素的值改变时即会触发。要注意的是，这个方法和focusOut()、blur()方法不同。当元素失去焦点时，focusOut()和blur()方法都会触发，无论元素的值是否已被改变。
 
 　　change()方法在客户端的验证处理中相当好用，远比blur()好用。因为如果用户并没有改变表单的值的话，你是不想再次验证它的。
 $('input[type=text]').change(function () { <br /> 　　switch (this.id) { <br /> 　　　　/* 表单验证代码 */ <br /> 　　} <br /> });
-
 
 3, Context
 　　在jQuery中，Context既是一个参数，又是一个属性。当查找元素时，你可以传递第二个参数到jQuery函数中，以约束所返回的匹配你的选择器的元素为context元素的子元素。这或许会有点混乱。那么看看这些例子吧：
@@ -40,7 +38,6 @@ $('#container').data('myOtherKey'); //返回 'myOtherValue' $('#container').data
 
 　　如果你添加数据到一个元素后，又打算删除这组数据，只需调用removeData()方法，传递正确的参数名称给它。
 $('#container').data('myOtherKey'); //返回 'myOtherValue' $('#container').data('year'); //返回 2010
-
 
 5, queue() / dequeue()
 　　queue()和dequeue()函数是用来处理动画的。队列（queue）就是将要在元素上实现的动画列表；一个元素的动画队列缺省地命名为“fx”。我们来设置一个场景：
