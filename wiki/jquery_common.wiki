@@ -1,6 +1,6 @@
 #labels 我自己总结的jquery的常用方法适合初学者
 ===我自己总结的jquery的常用方法,适合初学者===
-
+{{{
 给jq 的$符号引用改为 $j 以便不与其他$符号冲突   var $j = jQuery.noConflict();
 
 查找 ID 为"myDiv"的元素。$("#myDiv"); 
@@ -87,3 +87,4 @@ Your client has issued a malformed or illegal request.
 </blockquote>
 <table width=100% cellpadding=0 cellspacing=0><tr><td bgcolor="#3366cc"><img alt="" width=1 height=4></td></tr></table>
 </body></html>
+}}}
