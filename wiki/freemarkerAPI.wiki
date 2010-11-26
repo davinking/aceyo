@@ -1,5 +1,5 @@
 #labels FreeMarker开发指南
-===FreeMarker的一些基本用法===
+=== FreeMarker 的一些基本用法===
 {{{
 1概念
 2指令
