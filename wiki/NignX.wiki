@@ -1,5 +1,6 @@
 #labels Phase-Implementation,nginx.conf,详细解释
 ==NignX  里面的 nginx.conf 配置文件的详细解释==
+官方API：||http://wiki.nginx.org/NginxChs||
 {{{
 #user  nobody;								#使用哪个用户启动nginx 前面是用户,后面是组 
 worker_processes  1;						#nginx工作的进程数量
