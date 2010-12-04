@@ -17,46 +17,46 @@ worker_processes  1;						#nginx工作的进程数量
 #工作模式及连接数上限
 events {
 	#use [ kqueue | rtsig | epoll | /dev/poll | select | poll ]; 
-    worker_connections  1024;				#每个进程最大连接数（最大连接=连接数x进程数）
+    	worker_connections  1024;				#每个进程最大连接数（最大连接=连接数x进程数）
 }
 
 #设定http服务器，利用它的反向代理功能提供负载均衡支持
 http {
-    include       mime.types;				#设定mime类型
-    default_type  application/octet-stream;	#默认文件类型 
+	include       mime.types;				#设定mime类型
+	default_type  application/octet-stream;	#默认文件类型 
 	
 	#设定日志格式
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+    	#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    	#                  '$status $body_bytes_sent "$http_referer" '
+	#                  '"$http_user_agent" "$http_x_forwarded_for"';
 
 	#log_format download  '$remote_addr - $remote_user [$time_local] ' 
 	#						 '"$request" $status $bytes_sent ' 
 	#						 '"$http_referer" "$http_user_agent" ' 
 	#						 '"$http_range" "$sent_http_content_range"';
 
-    #access_log  logs/access.log	main;
+	#access_log  logs/access.log	main;
 	
 	#charset						gb2312,utf-8;	#默认编码     
-    #server_names_hash_bucket_size	128;			#服务器名字的hash表大小     
+	#server_names_hash_bucket_size	128;			#服务器名字的hash表大小     
 
-    sendfile        on;								#开启高效文件传输模式 
+	sendfile        on;								#开启高效文件传输模式 
 
 	#以下两个选项用于防止网络阻塞 
 	tcp_nopush		on; 
 	tcp_nodelay		on;
 
     
-    keepalive_timeout		65;		#超时时间
+	keepalive_timeout		65;		#超时时间
 
 	client_max_body_size	20m;    #上传文件大小限制 
 
 	#设定请求缓冲
-    client_header_buffer_size		1k;   
-    large_client_header_buffers		4 4k;
+	client_header_buffer_size		1k;   
+	large_client_header_buffers		4 4k;
 
 	#开启gzip模块
-    #gzip				on;
+	#gzip				on;
 	#gzip_min_length	1k;			#最小压缩文件大小 
 	#gzip_buffers		4 8k;		#压缩缓冲区 
 	#压缩类型,默认就已经包含text/html 所以下面就不用再写了,当然写上去的话,也不会有问题,但是会有一个warn 
@@ -84,8 +84,8 @@ http {
 
 	#虚拟主机的配置 
     server {
-        listen       80;
-        server_name  localhost;
+		listen       80;
+		server_name  localhost;
 
 		index        index.html index.htm index.jsp;
 		#root        /usr/local/tomcat/webapps/123;
@@ -93,7 +93,7 @@ http {
         charset utf-8;		#字符编码
 
 		#设定本虚拟主机的访问日志 
-        #access_log  logs/host.access.log  main;
+		#access_log  logs/host.access.log  main;
 		#client_header_timeout  3m;
 		#client_body_timeout    3m;
 		#send_timeout			3m;
@@ -105,9 +105,9 @@ http {
 		#对 访问动态服务器的地址 启用负载均衡  
         location ~ \.(jsp|jspx|do|action|yo)?$ {
 			proxy_pass				http://localhost;
-            proxy_set_header		Host $host;
-            proxy_set_header		X-Real-IP $remote_addr;
-            proxy_set_header		X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header		Host $host;
+			proxy_set_header		X-Real-IP $remote_addr;
+			proxy_set_header		X-Forwarded-For $proxy_add_x_forwarded_for;
 			client_max_body_size	10m;   #上传文件大小限制 
 			client_body_buffer_size 128k;   
 			proxy_connect_timeout	90;   
