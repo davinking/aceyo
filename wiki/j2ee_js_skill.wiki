@@ -58,6 +58,7 @@ showModalDialog(data['siteLink'],'',sFeathers);
 function check_all() {
 	$("input[name='chk_log']").each(function() {
 		$(this).attr('checked', !$(this).attr('checked')); // 全部反选的方法
+		// $('#chk_all').attr('checked')?
 		// $(this).attr('checked',true):$(this).attr('checked',false); //全选全不选的方法
 	});
 }
