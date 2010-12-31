@@ -63,6 +63,15 @@ function check_all() {
 	});
 }
 
+//** 取得下拉选单的选取值 **//
+$(#testSelect option:selected').text();         //某些时候就要用着方法.
+$("#testSelect").find('option:selected').text();
+$("#testSelect").val();         //这个值有可能会跟上面2个方法得到的值会不同.
+
+
+//**根据option的值选中下拉框 **//
+$('#testSelect').val('111');
+
 
 //** 对页面操作需要的提示文字   msg: 要提示的文字 **//
 function show_tip(msg) {
