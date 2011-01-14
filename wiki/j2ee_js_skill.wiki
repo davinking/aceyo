@@ -280,6 +280,11 @@ function mobileCheck(){
 	return myreg.test(obj)?true:false;
 }
 
+//** 输入必需是邮箱  **//
+function emailCheck(email){
+	var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	return myreg.test(email)?true:false;
+}
 
 //** 剩余字数检查方法 HTML 和 JS 方法 未用 JQ **//
 1. <textarea name="content" cols="50" rows="5" onkeydown="textCounter(this,this.form.remLen,100);" onkeyup="textCounter(this,this.form.remLen,100);" ></textarea><br/>
