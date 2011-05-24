@@ -203,6 +203,7 @@ function isEmpty(){
 //按钮绑定检查事件  设class为 ce 的都检查 是否为空的文本框
 function btn_live_click(){
 	$('.btn_ce').live('click',function(e){
+              // $(e.target) = $(this);       //得到触发对象2种方式
 		if( isEmpty() ){
 			alert('不能为空');
 			return false;
