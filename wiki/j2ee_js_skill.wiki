@@ -103,6 +103,7 @@ function init_alarm_type(){
 
 //** 在父窗口中操作 选中IFRAME中的所有单选钮**//
 $(window.frames["iframe1"].document).find("input[@type='radio']").attr("checked","true");
+$(window.iframe).contents().find("input[@type='radio']").attr("checked","true");  //没有id的方法
 //** 在IFRAME中操作 选中父窗口中的所有单选钮**//
 $(window.parent.document).find("input[@type='radio']").attr("checked","true");
 iframe框架的：<iframe src="test.html" id="iframe1" width="700" height="300" frameborder="0" scrolling="auto"></iframe>
