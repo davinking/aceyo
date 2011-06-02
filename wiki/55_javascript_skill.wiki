@@ -124,7 +124,7 @@ if (top.location != self.location)top.location=self.location;
 onclick="window.location = "view-source:"+ "http://www.pconline.com.cn"">
 12.删除时确认
 <a href=""javascript :if(confirm("确实要删除吗?"))location="boos.asp?&areyou=删除&page=1"">删除 </a>
-
+<a href="#" onClick="return confirm('sure?')">change</a>
 
 13. 取得控件的绝对位置
 //Javascript
