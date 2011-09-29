@@ -1,6 +1,6 @@
 #labels javascript,经验,进阶
 *开发经验浅谈之前端JS编写宝典*
-
+{{{
 一、简化代码
 
 采用更为简短的写法，不仅可以减少输入的字符数，还可以减少文件大小。大部分采用简单写法的代码，执行效率都有轻微提高。
@@ -309,3 +309,4 @@ for example :
 		function privateMethod=function(){};//静态私有方法 
 		return function(){/*真正的构造器*/};
 	};
+}}}
