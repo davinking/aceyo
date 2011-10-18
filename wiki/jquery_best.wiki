@@ -1,5 +1,6 @@
 #labels Phase-Implementation,jquery,提高,方法效率比较
 ==JQuery最佳实践==
+{{{
 1. 使用最新版本的jQuery
 jQuery的版本更新很快，你应该总是使用最新的版本。因为新版本会改进性能，还有很多新功能。
 下面就来看看，不同版本的jQuery性能差异有多大。这里是三条最常见的jQuery选择语句：
@@ -120,3 +121,4 @@ javascript原生循环方法for和while，要比jQuery的.each()方法快，应�
 　　var $text = $("#text");
 　　var $ts = $.text($text);
 由于后一种针对jQuery函数的版本不通过jQuery对象操作，所以相对开销较小，速度比较快。
+}}}
