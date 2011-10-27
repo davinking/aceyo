@@ -443,6 +443,15 @@ ${var?default(“hello world<br>”)?html}如果var is null那么将会被hello 
 ??代表如果为空
 </#if>
 
+${mouse!"No mouse."} 
+当mouse不存在时，返回default value
+
+(product.color)!"red"   这种方式，能够处理product或者color为miss value的情况； 
+而product.color!"red"将只处理color为miss value的情况 
+product.color??将只测试color是否为null 
+(product.color)??将测试product和color是否存在null 
+?exists:旧版本的用法 
+
 常用格式化日期
  openingTime必须是Date型,详细查看freemarker文档 Reference->build-in referece->build-in for date
 ${openingTime?date}
