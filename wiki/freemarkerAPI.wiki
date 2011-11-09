@@ -440,7 +440,7 @@ ${var?default(“hello world<br>”)?html}如果var is null那么将会被hello 
 也可以直接${mouse?if_exists})输出布尔形
 
 <#if member?? >
-??代表如果为空
+??代表如果变量存在
 </#if>
 
 ${mouse!"No mouse."} 
