@@ -184,6 +184,42 @@ function getDate(){
   $('#date').text(s);
 }
 
+//**把html的"<"和">"换成转义符.用jquery赋值的时候要转换回去,否则原文显示.**//
+$.fn.formatVal = function(args) {
+	if ($(this).is(':text,textarea')){
+		if(args != undefined){	//如果是赋值方法
+			return $(this).val(args.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+		}else{
+			return $(this).val().replace(/</g,'&lt;').replace(/>/g,'&gt;');
+		}
+	}else{
+		if(args != undefined){	//如果是赋值方法
+			return $(this).val(args);
+		}else{
+			return $(this).val();
+		}
+	}
+};
+
+//**当按钮点击提交的时候,限制连续点击,替换点击按钮的方法.**//
+//但是一个页面如果有多次使用的时候就会出现bug,可以试着传参解决.
+$.fn.submitLoadding = function(){
+	var imgUrl = 'images/loadding.gif';
+	$(this).hide();
+	$("#submitLoadding_box").remove();
+	$(this).after('<div id="submitLoadding_box"><img src="'+imgUrl+'"/>处理中...</div>');
+};
+$.fn.hideSubmitLoadding = function(){
+	$(this).show();
+	$("#submitLoadding_box").remove();
+};
+//使用方法
+$("#submit").bind("click", function(){
+	$(this).submitLoadding();
+	$.getJSON("test.js", function(){
+		$(this).hideSubmitLoadding();
+	});
+});
 
 ///*********************************************************************************////
 ///*******	功能: 检查为空方法. 页面加载要先执行btn_live_click()方法	********////
