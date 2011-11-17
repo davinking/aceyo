@@ -66,3 +66,4 @@ hr {display:block;height:1px;border:0;padding:0;border-top:1px solid #ccc;margin
 
 input, select,textarea {vertical-align:middle/9;letter-spacing:1px;color:#555;} // 注:"/9" 为ie678 都不执行前面的属性 ie6:解析"*",ie7解析"+"
 }}}
+https://github.com/necolas/normalize.css 这个东西要看看
