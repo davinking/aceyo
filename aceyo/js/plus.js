@@ -127,7 +127,7 @@ $(function(){
 	}
 
 	if($('#hamster').length > 0){	//about页
-		var so = new SWFObject("../images/hamster.swf", "hamster", "240", "240", "7", "#fff");so.addParam("wmode", "transparent");
+		var so = new SWFObject("/images/hamster.swf", "hamster", "240", "240", "7", "#fff");so.addParam("wmode", "transparent");
 		so.write("hamster");
 	}
 
