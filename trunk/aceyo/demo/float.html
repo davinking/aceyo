@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>CSS 清除浮动 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="CSS清除浮动Demo,浏览器兼容." />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<style type="text/css">
+.float_box:after{content:"";display:table;clear:both;}
+.float_box{zoom:1;}
+.float_box{width:860px;border:1px dashed #4999CB;margin:10px 0;padding:10px;font-size:14px;}
+.float_left{width:400px; height:150px;border:1px solid #F9B3D5;float:left;margin:10px;background:#FFE7F4;color:#FF0084}
+.float_right{width:400px; height:200px;border:1px solid #A5CF3D;float:right;background:#F2FDDB;color:#008C00;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/plus.js"></script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>CSS清除浮动的Demo,左右对齐,浏览器兼容.</b>
+	<div class="float_box">
+		<div class="float_left">做css有一段时间了，一直为解决块元素的浮动问题很不爽，主要是浏览器兼容问题。很差一段时间用的是float块元素后面加个&lt;br style='float:all' /&gt;方式。今天才知道原来有更清爽完美的方案.</div>
+		<div class="float_right">只需设置父元素的css就可以解决子元素float的问题了。测试了几个浏览器，都没问题，感谢那些css大仙的share。</div>
+	</div>
+	<a href="javascript:void(0)" class="button red medium" onclick="$('textarea').select();">复制代码</a>
+	<textarea readonly style="width:880px;height:230px;border:1px dashed #4999CB;">
+	//css部分
+	.float_box:after{content:"";display:table;clear:both;}
+	.float_box{zoom:1;}
+
+	//html 部分
+	<div class="float_box">
+		<div class="float_left">左浮动元素</div>
+		<div class="float_right">右浮动元素</div>
+	</div>
+	</textarea>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

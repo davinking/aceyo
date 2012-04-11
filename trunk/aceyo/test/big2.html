@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="zh-CN" />
+	<title>主页</title>
+	<script src="jquery-1.4.2.min.js"></script>
+	<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+  <script>
+	
+	$(function(){
+		//$('#nexus').iextended({'width':400});
+		
+		$('#nexus li:first').css({'z-index':1,display:'block',width:'200px',height:'400px'});
+		
+		$('#nexus').click(function(e){
+			var el = $(e.target);
+			
+			el.animate({left: "-220px", opacity:"hidden"},1000);
+			el.next().animate({width:'200px',height:'400px',opacity:"show"},1000);
+			
+		});
+	});
+  </script>
+  <style type='text/css'>
+	.flt_box:after{content:"";display:table;clear:both;}
+	.flt_box{zoom:1;}
+	
+	#nexus{padding:0;margin:20px auto;border:1px solid green;position: relative; overflow: hidden; width:300px; height:400px}
+	#nexus li{float:left;list-style:none;
+			padding:10px;background:silver;position:absolute;display:none;
+			}
+  </style>
+</head>
+<body>
+
+<div style="position:relative">
+<p style="background-color:yellow;width:100px;position:absolute;float:left; display:none;">This is a paragraph.</p>
+</div>
+
+	<ul id="nexus">
+		<li>第1个层，变大，大小100+20发生大幅倒萨</li>
+		<li style="background:#33CCCC">第2个层，变大，大小1fsdafdsa0+20</li>
+		<li style="background:#66CC99">第3个层，变大，fwefew大小fsdaf100+20</li>
+		<li style="background:#0066CC">第4个层，变大fewfew，大小100+20</li>
+	</ul>
+
+</body>
+</html>
