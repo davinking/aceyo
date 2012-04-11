@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>JQuery自动提示 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="JQuery自动提示,支持每次读取数据库" />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<style type='text/css'>
+.autocomplete-w1 { background:url(shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:8px 0 0 6px; /* IE6 fix: */ _background:none; _margin:0; }
+.autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; }
+.autocomplete .selected { background:#DFEFFF; }
+.autocomplete div { padding:2px 5px; white-space:nowrap;border-top: 1px solid #EEE; font-size:14px; }
+.autocomplete strong { font-weight:normal; color:#3399FF; }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="ajaxcomplete.page.js"></script>
+<script src="/js/plus.js"></script>
+<script>
+$(function() {
+	//本地数据查询方法, 
+	$('#months').autocomplete({
+		width: 384,
+		delimiter: /(,|;)\s*/,
+		lookup: 'January,February,March,April,May,June,July,August,September,October,November,December'.split(',')
+	});
+	//调用后台方法, 每次读取一次数据库的方式.
+	var options = {
+		serviceUrl: '../getEmpByName.jsp',		//后台路径, 
+		width: 240,
+		delimiter: /(,|;)\s*/,
+		noCache: true,
+		onSelect: function(value, data){ 
+			alert('You selected: ' + value + ', ' + data);
+		}
+	};
+	$('#query').autocomplete(options);
+
+	//调用本地文件方法, 要放到服务器上测试.(jq的ajax不支持访问本地文件了.)
+	var options = {
+		serviceUrl: 'data.js',		//后台路径, 
+		width: 240,
+		delimiter: /(,|;)\s*/,
+		noCache: true,
+		onSelect: function(value, data){ 
+			alert('You selected: ' + value );
+		}
+	};
+	$('#data').autocomplete(options);
+});
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>官方网址：http://www.devbridge.com/projects/autocomplete/jquery. <br/>
+	测试入口: 
+	后台方法: <input class="textbox" id="query" type="text" value='远程无效,所以这个没法用' />
+	本地方法: <input class="textbox" id="months" name="q" type="text" />
+	本地文件方法: <input class="textbox" id="data"  type="text" /><br /></b>
+	<textarea readonly  style="width:880px;height:450px;border:1px dashed #4999CB;margin-top:10px">
+	参数说明: 
+	$('#query').autocomplete({ 
+		serviceUrl:'service/autocomplete.action',	//servlet路径. 返回json格式.
+		minChars:2,						//第几位字符开始查询.
+		delimiter: /(,|;)\s*/,				// 正则过滤
+		maxHeight:400,					//层高
+		width:300,							//层宽
+		zIndex: 9999,						// z坐标轴
+		deferRequestBy: 0,			//延时毫秒数.
+		params: { country:'Yes' },	//后台传的固定参数, 不是查询的变量参数.
+		noCache: false,					// 缓存查询数据.默认缓存(false)
+		// 回调函数
+		onSelect: function(value, data){		//选中后执行. value和data
+			alert('You selected: ' + value + ', ' + data); 
+		},
+		// 本地提示数据.:
+		lookup: ['January', 'February', 'March', 'April', 'May']
+	});
+
+	//原版要求的查询返回的数据结构
+	{
+	 query:'Li',	 //每次查询的关键词.
+	 suggestions:['Liberia','Libyan Arab Jamahiriya','Liechtenstein','Lithuania'],	//提示的数据.
+	 data:['LR','LY','LI','LT']	//没明白. 可以为空, 以上2个不可以.
+	}
+
+	//源码中 默认值:
+      autoSubmit: false,
+      minChars: 1,
+      maxHeight: 300,
+      deferRequestBy: 0,
+      width: 0,
+      highlight: true,
+      params: {},
+      fnFormatResult: fnFormatResult,
+      delimiter: null,
+      zIndex: 9999
+
+	//弹出层的原型结构
+	<div class="autocomplete-w1">
+	  <div style="width:299px;" id="Autocomplete_1240430421731" class="autocomplete">
+		<div><strong>Li</strong>beria</div>
+		<div><strong>Li</strong>byan Arab Jamahiriya</div>
+		<div><strong>Li</strong>echtenstein</div>
+		<div class="selected"><strong>Li</strong>thuania</div>
+	  </div>
+	</div>
+
+	//css 部分
+	.autocomplete-w1 { background:url(img/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; }
+	.autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; }
+	.autocomplete .selected { background:#F0F0F0; }
+	.autocomplete div { padding:2px 5px; white-space:nowrap; overflow:hidden; }
+	.autocomplete strong { font-weight:normal; color:#3399FF; }
+
+	// 以下是改源码的部分介绍:
+	//2个js文件autocomplete.js 是2个方法名不一样的.
+	很多时候, 我们请求的数据格式与源码要求的格式有出入, 就需要改源码. 改的地方不多. 
+	如果你请求的数据格式是 与 文件 "data.js" 里面的格式相同. 
+	我的格式: {"errorCode":0,"errorMsg":"","ssts":[{"id":15,"name":"朝阳路法宝"},{"id":92,"name":"麦德龙京顺路"}]}
+
+	更改方式为:
+	1. 这段是负责请求后的json解析的 , 根据自己的格式改. query字段代码里面是必须的不能没有. 所有这里不判断就可以了.
+	原:
+	  if (response.suggestions.length === 0) { this.badQueries.push(response.query); }		//295行
+      }
+      if (response.query === this.getQuery(this.currentValue)) {
+        this.suggestions = response.suggestions;
+	改:
+		if(response.ssts){			//我没有query字段, 这行判断要删了.后面的括号也要注释掉.
+			this.suggestions = response.ssts;		//多个不同格式 的 json 数据就判断一下.
+		}else if (response.lotteries){
+			this.suggestions = response.lotteries;
+		}else if (response.employees){
+			this.suggestions = response.employees;
+		}else{
+			this.suggestions = [];
+		}
+	
+	2. 数组内的json对象解析, 需要更改.
+	原:
+	val = arr.suggestions[i];				//223行
+	改:
+	val = this.suggestions[i].name?this.suggestions[i].name:this.suggestions[i];
+	//相应的改为上面的形式.
+	// getSuggestionsLocal 函数内 : val = arr.suggestions[i];	可以不改变. 于223行.
+	//276 行, s = this.suggestions[i].name?this.suggestions[i].name:this.suggestions[i]; 增加 一个判断 . if(typeof(s) == 'object') break; 防止json格式错误,导致s为object
+
+	3. 如果我需要选中后, 得到id 或其他的. 选择后返回值需要更改.
+	原:
+      d = me.data[i];		//372行
+	改:
+	  s = me.suggestions[i].name?me.suggestions[i].name:me.suggestions[i];
+	  d = me.suggestions[i].mobile?me.suggestions[i].mobile:me.data[i];
+
+	
+	4.关键词参数, 我后台需要的是q. 默认是query
+	原:
+	me.options.params.query = q;		//241行
+	改:
+	me.options.params.q = q;
+	</textarea>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

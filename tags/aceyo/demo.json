@@ -1,0 +1,22 @@
+[
+{"id":"jQuery AutoComplete","url":"demo/complete/autocomplete.html","desc":"一次读取所有数据页面内检索.","tags":"jQuery, css, 自动提示"},
+{"id":"jQuery AjaxComplete","url":"demo/complete/ajaxcomplete.html","desc":"支持多次与服务器交互读取.","tags":"jQuery, css, 自动提示"},
+{"id":"Google Map API","url":"demo/map/mapsearch.html","desc":"谷歌地图搜索,定点,拖动,获取经纬度.","tags":"jQuery, css, map, localSearch"},
+{"id":"CSS Button","url":"demo/cssbutton.html","desc":"css 做的HTML5漂亮按钮.","tags":"css, html5, 按钮"},
+{"id":"JS Progress","url":"demo/progress/progress.html","desc":"js 写的进度条,有点不太完美.","tags":"javascript, progress, 进度条"},
+{"id":"JS Calendar","url":"demo/calendar/calendar.html","desc":"js 日期控件,有日期和时间,小巧和简单.","tags":"javascript, css, 日期插件"},
+{"id":"JS Chart","url":"demo/canvas/canvas.html","desc":"js 统计报表图.","tags":"javascript, css, canvas, 统计报表"},
+{"id":"jQuery Navigation","url":"demo/navigation.html","desc":"jQuery 写的导航悬停,无队列问题.","tags":"jQuery, css, navigation, 网站导航"},
+{"id":"CSS Float","url":"demo/float.html","desc":"css清除浮动完美解决方案.","tags":"css, float, hack, 清除浮动"},
+{"id":"Web2.0 Color","url":"demo/web20.html","desc":"主流web2.0网站的配色方案.","tags":"css, web2.0, color, 颜色"},
+{"id":"Toggle DIV","url":"demo/toggle/index.html","desc":" 倾斜导航标签, 联动切换层示例","tags":"jQuery, css, toggle, 联动切换"},
+{"id":"Ajax LongPolling","url":"demo/longpoll.html","desc":"Ajax长轮询推送, web推送.","tags":"jQuery, servlet, LongPolling, 长轮询"},
+{"id":"Compose MD5","url":"demo/md5.html","desc":"js 生成MD5值和测试生成的MD5.","tags":"javascript, md5, 生成MD5"},
+{"id":"CSS Library","url":"demo/csslib.html","desc":"css公共库和reset css 的一些.","tags":"css, library, reset, 公共库"},
+{"id":"FreeMarker API","url":"demo/freemarker.html","desc":"FreeMarker开发指南, 一些基本用法API.","tags":"freemarker, j2ee,模板语言"},
+{"id":"jQuery Best Practice","url":"demo/jqbest.html","desc":"JQuery最佳实践, 方法效率比较.","tags":"jQuery, 最佳实践, 效率比较, 高阶部分 "},
+{"id":"jQuery Skill","url":"demo/jqskill.html","desc":"jQuery50个必备的实用代码段.","tags":"jQuery, 实用代码, 中阶部分"},
+{"id":"JS Experience","url":"demo/jsexperience.html","desc":"前端实际开发总结的经验.","tags":"javascript, jQuery, 个人开发总结"},
+{"id":"JS Total","url":"demo/jstotal.html","desc":"开发经验浅谈之前端JS编写宝典.","tags":"javascript, 宝典, 低阶部分"},
+{"id":"CSS Normalize","url":"demo/normalize.html","desc":"让你的html在所有浏览器中获得一致效果.","tags":"css, normalize, 一致效果"}
+]

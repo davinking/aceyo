@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>谷歌地图搜索 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="谷歌地图API演示." />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<style type='text/css'>
+.hover {background: #FFC;}
+table{border-collapse:collapse;width:400px;margin-top:10px;font-size:12px;}
+table td,table th{border:1px solid #4999CB;}
+.green {
+    color: #e8f0de;
+    border: solid 1px #538312;
+    background: #64991e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+    background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+.green:hover {
+    background: #538018;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+    background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+.green:active {
+    color: #a9c08c;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+    background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+.rosy {
+    color: #fae7e9;
+    border: solid 1px #b73948;
+    background: #da5867;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f16c7c), to(#bf404f));
+    background: -moz-linear-gradient(top,  #f16c7c,  #bf404f);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f16c7c', endColorstr='#bf404f');
+}
+.rosy:hover {
+    background: #ba4b58;
+    background: -webkit-gradient(linear, left top, left bottom, from(#cf5d6a), to(#a53845));
+    background: -moz-linear-gradient(top,  #cf5d6a,  #a53845);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#cf5d6a', endColorstr='#a53845');
+}
+.rosy:active {
+    color: #dca4ab;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bf404f), to(#f16c7c));
+    background: -moz-linear-gradient(top,  #bf404f,  #f16c7c);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf404f', endColorstr='#f16c7c');
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="/js/plus.js"></script>
+<script>
+var latLngs = [];		//坐标点数组
+var localSearch;		//google搜索对象
+google.load('search', '1', {"callback" : OnLoad});
+
+//页面加载后加载地图对象
+$(function(){
+	$.getScript('http://maps.google.com/maps/api/js?sensor=false&language=zh-CN&callback=initialize');
+});
+
+(function(w){
+	var _gmap = function(){
+		this.lat = 39.92134641;		//中心点纬度
+		this.lng = 116.3995542;		//中心点经度
+		this.id = 'map';			//显示的div id
+		this.map = null;			//google 地图对象
+		this.markerArray = [];	//marker 数组
+	};
+	_gmap.prototype={
+		init:function() {
+			var latlng = new google.maps.LatLng(this.lat, this.lng);
+			var myOptions = {
+				zoom: 10, center: latlng,								//放大等级和中心点
+				disableDefaultUI: true,zoomControl:true,	//隐藏默认ui 和显示放大控件
+				zoomControlOptions:{'style':'SMALL'},		//控件大小样式
+				mapTypeId: google.maps.MapTypeId.ROADMAP //地图显示类型
+			};
+			this.map = new google.maps.Map(document.getElementById(this.id), myOptions);	//写入div
+			//将装有自定义控件的容器放置在地图顶部右侧
+			this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(module.tipControl()); 
+			//增加鼠标点击事件写入坐标点位置(只触发一次)
+			google.maps.event.addListener(this.map, 'click', function(event) {
+				document.getElementById(Gmap.tip).innerHTML= event.latLng.toUrlValue(8);	//精确到小数点位数
+				getLatLngOnMap(event.latLng.toUrlValue(8));													//地图外显示. (备选方案)
+				Gmap.dragMarker(event.latLng);																		//可拖动的Marker,标经纬度用的(备用)	
+			});
+		},
+		placeMarker:function(){
+			var mShadow = new google.maps.MarkerImage( "mshadow.png",null, null, new google.maps.Point(6, 20) );
+			var yellow = 'yellow.png';
+			var red = 'red.png'
+			var len = latLngs.length;
+			for(var i=0;i<len;i++){
+				var latlng = new google.maps.LatLng(latLngs[i].lat,latLngs[i].lng);	//生成经纬度对象
+				var marker = new google.maps.Marker({	
+						position: latlng,
+						map: this.map,
+						title: latLngs[i].id,
+						icon: yellow,
+						shadow: mShadow,
+						animation: google.maps.Animation.DROP //如果点太多,比如>50,就不要添加坠入效果.否则会很卡.
+					});
+				this.markerArray.push(marker);		//存入数组
+				Gmap.toggleMarker(marker,i,yellow,red);		//marker在地图上
+			}
+		},
+		//可拖动的Marker,标经纬度用的(备用)
+		dragMarker:function(latLng){
+			if (this.tempMarker){ this.tempMarker.setMap(null); }	//清除临时标签
+			var shadow = new google.maps.MarkerImage(
+				 "mshadow.png",new google.maps.Size(22, 20), new google.maps.Point(0, 0), new google.maps.Point(6, 20)
+				 );
+			var rIcon = new google.maps.MarkerImage(
+				  "red.png", new google.maps.Size(12, 20), new google.maps.Point(0, 0), new google.maps.Point(6, 20)
+				  );
+			var marker = new google.maps.Marker({
+				position:  latLng,
+				title: '可拖动的Marker,标经纬度用',
+				map: this.map,
+				icon: rIcon,
+				shadow: shadow,
+				draggable: true
+			  });
+			 // 另有 dragstart 和 dragend 事件
+			google.maps.event.addListener(marker, 'drag', function() {
+				updateMarkerPosition(marker.getPosition());
+			  });
+			this.tempMarker =marker;						//存入临时标签
+		},
+		//清除marker
+		clear:function(){
+			if (this.markerArray){
+				for(var i in this.markerArray){
+					this.markerArray[i].setMap(null);
+				}
+				this.markerArray.length = 0;
+			}
+		},
+		//切换标签
+		toggleMarker:function(marker,i,yellow,red) {
+			var tr = $('#callList tr').get(i);
+			google.maps.event.addDomListener(tr, 'mouseover', function() { 
+				marker.setOptions({icon: red}); 
+				$(tr).addClass("hover");
+			});
+			google.maps.event.addDomListener(tr, 'mouseout', function() { 
+				marker.setOptions({icon: yellow}); 
+				$(tr).removeClass("hover");
+			});
+		 }
+	};
+	//地图右上角div容器对象
+	var module = {
+		tipControl:function() {
+			var tipControlDiv = document.createElement("div");		//创建控件容器
+			tipControlDiv.style.padding = "2px 4px";
+			tipControlDiv.style.fontSize = "12px";
+			tipControlDiv.style.background="#ffc";
+			tipControlDiv.style.borderLeft="1px solid #676767";
+			tipControlDiv.style.borderBottom="1px solid #676767";
+			tipControlDiv.id = Gmap.tip;
+			return tipControlDiv;
+		}
+	};
+	w.Gmap = new _gmap();
+})(window);
+
+// 这个方法用在地图路径的回调函数参数值、
+function initialize(){
+	   Gmap.init();
+}
+//地图外显示. (备选方案)
+function getLatLngOnMap(latlng){
+	$('#poi2').html("点击后的坐标点经纬度: "+latlng);
+}
+//可拖动的Marker,标经纬度用的(备用)
+function updateMarkerPosition(latLng) {
+	$('#info').html("托动后的坐标点经纬度: "+[ latLng.lat(),latLng.lng() ].join(', '));
+}
+
+//搜索加载的默认参数
+function OnLoad() {
+	localSearch = new google.search.LocalSearch();
+	localSearch.setResultSetSize(GSearch.LARGE_RESULTSET);		//结果集大小
+	localSearch.setCenterPoint("北京");										//搜索结果设定的中心点
+	localSearch.setSearchCompleteCallback(this, searchComplete, null);	//搜索后回调
+}
+//搜索得到坐标点
+function showPlaceOnMap(){
+	var key = $('#keyword').val();	//文本框值
+	if(localSearch){localSearch.execute(key);}		//搜索
+}
+//搜索结束后回调
+function searchComplete(){
+	var pcur = localSearch.cursor;
+	var cur = 0 ;
+	var html ='' ;
+	try{ cur = pcur.currentPageIndex; }catch(err){};
+	latLngs = [] ;									//清数据
+	latLngs = localSearch.results;			//结果集
+	if(latLngs && latLngs.length>0){
+		for (var i in latLngs){
+			var obj = latLngs[i];
+			html += '<tr><th>'+(parseInt(i)+1)+'</th><td>'+latLngs[i].titleNoFormatting+'</td><td>'+latLngs[i].streetAddress+'</td><td>'+latLngs[i].lat+' ; '+latLngs[i].lng+'</td></tr>';
+		}
+		html+="<tr><td colspan='4'>　当前第:"+(cur+1)+"页.　<a href='javascript:pages(\"-\","+cur+")'>上一页</a>　<a href='javascript:pages(\"+\","+cur+")'>下一页</a>　<span id='p_s'></span></td></tr>";
+	
+		$('#callList').html(html);	//写入tbody标签
+		Gmap.clear();				//清地图元素
+		Gmap.map.setCenter(new google.maps.LatLng(latLngs[0].lat, latLngs[0].lng));	//重新定位中心点
+		Gmap.placeMarker();		//显示
+	}
+}
+//分页按钮
+function pages(key,cp){
+	var cur = cp;
+	if(!localSearch.cursor) return;
+	var len = localSearch.cursor.pages.length;
+	if(key == "+"){
+		if(cur<len){ localSearch.gotoPage(++cur); }
+	}else{
+		if(cur>0){ localSearch.gotoPage(--cur); }
+	}
+}
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<div id="map" style="width:460px;height:500px;border:1px dashed #4999CB;float:left"></div>
+	<div style="width:400px;height:500px;float:left;margin-left:5px;">
+		<b>鼠标点击地图,右上角显示点击位置的经纬度.拖动显示坐标点.<br />
+		地点: </b><input type="text" id="keyword" value="北京市丰台区云岗" />
+		<a href="javascript:showPlaceOnMap()" class="button green small">搜索</a>
+		<a href="javascript:Gmap.clear()" class="button rosy small">清除坐标</a>
+		<table id="customerlist" cellspacing="0" cellpadding="0">
+			<tr>
+			  <th width="7%">序号</th>
+			  <th width="23%">名称</th>
+			  <th width="50%">地址</th>
+			  <th width="30%">坐标</th>
+			</tr>
+			<tbody id="callList"></tbody>
+		</table>
+		<div id="poi2" style="width:400px;height:20px;margin-top:10px;font-size:12px;border:1px dashed red"></div>
+		<div id="info" style="width:400px;height:20px;margin-top:10px;font-size:12px;border:1px dashed blue"></div>
+	</div>
+	<br style="clear:both" />
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>
