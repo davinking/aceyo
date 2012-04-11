@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>CSS 导航标签 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="CSS的导航标签的Demo,选中标签下面无横线,和左右对齐,浏览器兼容." />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<style type="text/css">
+#tabs_title{height:26px; width:790px; border-bottom:1px solid #8DB2E3;} 
+#tabs_title ul{list-style:none;margin:0px 3px; padding:0px; *position:absolute} 
+#tabs_title ul li {float:left;margin-left:5px;}
+#tabs_title ul li a{border:1px solid #8DB2E3;outline:0;line-height:15px;width:51px;padding:5px 7px;
+display:block;text-align:center;text-decoration:none;color:#416AA3;background:url('/images/tabs_bg.jpg') repeat-x 0 -32px;
+-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;} 
+#tabs_title ul li a:hover,#tabs_title ul li a.over {border-bottom:1px solid #fff;background:url('/images/tabs_bg.jpg') repeat-x; }
+#tabs_title ul li a.over {font:bold 12px "宋体";width:54px;line-height:15px;}
+#tabs_cont {padding:5px 10px;border:1px solid #8DB2E3;border-top:0;width:768px; } 
+#tabs_cont ul{list-style:none;margin:5px 10px; padding:0; display:none;}
+#tabs_cont ul li{margin:5px 0;line-height:30px;height:28px;}
+#tabs_cont ul li:hover{ background:#dfdfdf;}
+#tabs_cont ul li span{float:right; line-height:30px;}
+#tabs_cont ul li input{vertical-align:middle;margin-top:-3px}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/plus.js"></script>
+<script>
+$(function(){
+	$('#tabs_title li').click(function(){
+		var _$this = $(this);
+		_$this.find('a').addClass('over');
+		_$this.siblings().find('a').removeClass('over');
+		$('#tabs_cont>ul').eq(_$this.index()).show().siblings().hide();
+	}); 
+	//全选
+	$('#ncheck_all').click(function(){
+		var ck = $(this).attr('checked')?true:false;
+		$('#tabs_cont').find(':checkbox').attr('checked',ck);
+	});
+});
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>CSS的导航标签的Demo,选中标签下面无横线,和左右对齐,浏览器兼容.</b>
+	<div style="width:860px;height:260px;border:1px dashed #4999CB;margin:10px 0;padding:10px;">
+		<div id="tabs_title"> 
+		<ul> 
+		  <li><a href="javascript:void(0)" class="over">美女明星</a></li>
+		  <li><a href="javascript:void(0)">新闻资讯</a></li>
+		  <li><a href="javascript:void(0)">音乐ＭＶ</a></li>
+		  <li><a href="javascript:void(0)">热门电影</a></li>
+		</ul> 
+	  </div>
+	  <div id="tabs_cont">
+		<ul style="display:block">
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>超级简单的倒车方法</li>
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>侧方停车</li>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>上海车模第一视频</li>
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>机动车倒车视频</li>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>悍马与吉普的较量</li>
+			<li> <input id="ncheck_all" type="checkbox" value="" /><label for="ncheck_all">全选</label> <input type="submit" onClick="return confirm('确认要发送所选视频么?')" id="button" value="发 送"></li>
+		 </ul>
+		 <ul>
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>机动车倒车视频</li>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>悍马与吉普的较量</li>
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>武王争霸赛</li>
+			<li> <input id="check_all" type="checkbox" value=""/><label for="check_all">全选</label>  <input type="submit" onClick="return confirm('确认要发送所选视频么?')" id="button" value="发 送"></li>
+		 </ul>
+		 <ul>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>悍马与吉普的较量</li>
+			<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>武王争霸赛</li>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>单边过桥技巧</li>
+		  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>Nobody教程</li>
+			<li> <input id="check_all" type="checkbox" value="" onClick="checkAll()"/><label for="check_all">全选</label> <input type="submit" onClick="return confirm('确认要发送所选视频么?')" id="button" value="发 送"></li>
+		 </ul><ul></ul>
+	  </div>
+	</div>
+	<a href="javascript:void(0)" class="button red medium" onclick="$('textarea').select();">复制代码</a>
+	<textarea readonly style="width:880px;height:450px;border:1px dashed #4999CB;">
+	//css部分
+	#tabs_title{height:26px; width:790px; border-bottom:1px solid #8DB2E3;} 
+	#tabs_title ul{list-style:none;margin:0px 3px; padding:0px; *position:absolute} 
+	#tabs_title ul li {float:left;margin-left:5px;}
+	#tabs_title ul li a{border:1px solid #8DB2E3;outline:0;line-height:15px;width:51px;padding:5px 7px;
+	display:block;text-align:center;text-decoration:none;color:#416AA3;background:url('tabs_enabled.png') repeat-x;
+	-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;} 
+	#tabs_title ul li a:hover,#tabs_title ul li a.over {border-bottom:1px solid #fff;background:url('t_bg.jpg') repeat-x 0,32px; }
+	#tabs_title ul li a.over {font:bold 12px "宋体";width:54px;line-height:15px;}
+	#tabs_cont {padding:5px 10px;border:1px solid #8DB2E3;border-top:0;width:768px; } 
+	#tabs_cont ul{list-style:none;margin:5px 10px; padding:0; display:none;}
+	#tabs_cont ul li{margin:5px 0;line-height:30px;height:28px;}
+	#tabs_cont ul li:hover{ background:#dfdfdf;}
+	#tabs_cont ul li span{float:right; line-height:30px;}
+	#tabs_cont ul li input{vertical-align:middle;margin-top:-3px}
+
+	//jq 部分 
+	$(function(){
+	 $('#tabs_title li').click(function(){
+		var _$this = $(this);
+		_$this.find('a').addClass('over');
+		_$this.siblings().find('a').removeClass('over');
+		$('#tabs_cont>ul').eq(_$this.index()).show().siblings().hide();
+	 }); 
+	//全选
+	 $('#ncheck_all').click(function(){
+		var ck = $(this).attr('checked')?true:false;
+		$('#tabs_cont').find(':checkbox').attr('checked',ck);
+	 });
+	});
+
+	//html 部分
+	<div id="tabs_title"> 
+		<ul> 
+		  <li><a href="javascript:void(0)" class="over">美女明星</a></li>
+		  <li><a href="javascript:void(0)">新闻资讯</a></li>
+		  <li><a href="javascript:void(0)">音乐ＭＶ</a></li>
+		  <li><a href="javascript:void(0)">热门电影</a></li>
+		</ul> 
+	  </div>
+	<div id="tabs_cont">
+	<ul style="display:block">
+		<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>超级简单的倒车方法</li>
+		<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>侧方停车</li>
+	  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>上海车模第一视频</li>
+		<li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>机动车倒车视频</li>
+	  <li><span>3元/条</span><input name="checkele" type="checkbox" value=""/>悍马与吉普的较量</li>
+		<li> <input id="ncheck_all" type="checkbox" value="" /><label for="ncheck_all">全选</label> <input type="submit" onClick="return confirm('确认要发送所选视频么?')" id="button" value="发 送"></li>
+	 </ul>
+    </div>
+	</textarea>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

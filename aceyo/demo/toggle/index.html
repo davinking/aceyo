@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>联动切换层 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="	JQuery 联动切换层示例 ,css倾斜导航" />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/plus.js"></script>
+<style type="text/css" >
+#know{margin:5px;width:513px;height:350px; background:url(bg.png) no-repeat; }
+.know_tit{margin:0 0 0 20px;width:480px;}
+.know_tit a{ background:url(arr.png) no-repeat; width:123px; height:24px; line-height:24px; float:left; margin:1px 0 0 -61px;  padding:0 0 0 38px; color:#660000; font-family:"宋体"}
+.know_tit .crt{ background:url(arr.png) no-repeat 0 -24px; color:#ebe5e5}
+.know_tit .fcrt{margin-left:25px;}
+.know_content{width:445px; height:285px; margin:15px 0 0 45px;}
+.know_content div{width:445px;display:none}
+.clear{ clear:both;}
+.know_content .show{ display:block}
+
+#know2{margin:20px;width:513px;height:350px; background:url(bg.png) no-repeat;}
+.know_tit2{margin:0 0 0 20px;width:480px;}
+.know_tit2 a{ background:url(arr.png) no-repeat; width:123px; height:24px; line-height:24px; float:left; margin:1px 0 0 -61px;  padding:0 0 0 38px; color:#660000; font-family:"宋体"}
+.know_tit2 .crt{ background:url(arr.png) no-repeat 0 -24px; color:#ebe5e5}
+.know_tit2 .fcrt{margin-left:25px;}
+.know_content2{width:445px; height:285px; margin:15px 0 0 45px;}
+.know_content2 div{width:445px; display:none}
+.know_content2 .show{ display:block}
+</style>
+<script>
+$(function(){
+	toggleTab();
+});
+//第一种方式
+function toggle(obj,div){
+	$(obj).addClass('crt').siblings().removeClass('crt');
+	$('.know_content>.'+div).addClass('show').siblings().removeClass('show');
+	
+}
+//第二种绑定的方式
+function toggleTab(){
+	var $know = $('.know_tit2');
+	var $know_a = $know.find('a');		//所有a元素, find方法是效率最高的.
+
+	$know_a.eq(0).data('key','play');		//储存数据
+	$know_a.eq(1).data('key','type');
+	$know_a.eq(2).data('key','buy');
+
+	$know.click(function(e){		//父级监听获取点击的事件效率高很多
+		var $even = $(e.target);		//得到点击的元素
+		var key = $even.data('key');			//得到内置数据,用来辨别哪个层变化
+		 $even.addClass('crt').siblings().removeClass('crt');		//siblings获取同级元素. 效率比先移除所有再添加要高.
+		 $('.know_content2>.'+key).addClass('show').siblings().removeClass('show');	//用">"比用" " 更准确高效.
+		 return false;									//防止内部方法继续执行.(执行置顶跳动)
+	});
+}
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>联动切换层 ,css实现的倾斜导航, 2种js实现的方式.</b>
+	<div id='float_box' style="width:860px;border:1px dashed #4999CB;margin:10px 0;padding:10px;">
+		<div id="know">
+			<div class="know_tit">
+				<a href="javascript:void(0)" onclick="toggle(this,'play')" class="crt fcrt">js使用</a>
+				<a href="javascript:void(0)" onclick="toggle(this,'type')" >实现区别</a>
+				<a href="javascript:void(0)" onclick="toggle(this,'buy')"  >关于css</a>
+				<br class="clear" />
+			</div>
+			<div class="know_content">
+				<div class="play show">A标签中通过href和onclick传递的this对象.onclick这个this指的就是a这个对象，<br />而使用href的方式时javascript:fun(this)，由于是一个地址，这个this就无处可指了。<br />href="javascript:void(0)" 可以防止每次点击都返回到顶部.</div>
+				<div class="type">我总共写了2种实现联动切换的方法.这种方法js代码很少,简单清晰,但html内容增加,另一种就是用jq的绑定事件,js代码会有点繁琐.html简单</div>
+				<div class="buy">此处的show样式,必须要写成.know_content .show{}, 直接写会找不到show这个样式,<br />因为class平级权限的话,第二个的class是无效的，级别为：标签 < class < id .</div>
+			</div>
+		</div>
+	</div>
+	<a href="javascript:void(0)" class="button red medium" onclick="$('textarea').select();">复制代码</a>
+	<textarea readonly style="width:880px;height:450px;border:1px dashed #4999CB;">
+	//css部分
+	#know{margin:20px;width:513px;height:350px; background:url(bg.png) no-repeat; }
+	.know_tit{margin:0 0 0 20px;width:480px;}
+	.know_tit a{ background:url(arr.png) no-repeat; width:123px; height:24px; line-height:24px; float:left; margin:1px 0 0 -61px;  padding:0 0 0 38px; color:#660000; font-family:"宋体"}
+	.know_tit .crt{ background:url(arr.png) no-repeat 0 -24px; color:#ebe5e5}
+	.know_tit .fcrt{margin-left:25px;}
+	.know_content{width:445px; height:285px; margin:15px 0 0 45px;}
+	.know_content div{width:445px;display:none}
+	.clear{ clear:both;}
+	.know_content .show{ display:block}
+
+	#know2{margin:20px;width:513px;height:350px; background:url(bg.png) no-repeat;}
+	.know_tit2{margin:0 0 0 20px;width:480px;}
+	.know_tit2 a{ background:url(arr.png) no-repeat; width:123px; height:24px; line-height:24px; float:left; margin:1px 0 0 -61px;  padding:0 0 0 38px; color:#660000; font-family:"宋体"}
+	.know_tit2 .crt{ background:url(arr.png) no-repeat 0 -24px; color:#ebe5e5}
+	.know_tit2 .fcrt{margin-left:25px;}
+	.know_content2{width:445px; height:285px; margin:15px 0 0 45px;}
+	.know_content2 div{width:445px; display:none}
+	.know_content2 .show{ display:block}
+
+	//jq 部分 
+	$(function(){
+		toggleTab();
+	});
+	//第一种方式
+	function toggle(obj,div){
+		$(obj).addClass('crt').siblings().removeClass('crt');
+		$('.know_content>.'+div).addClass('show').siblings().removeClass('show');
+	}
+	//第二种绑定的方式
+	function toggleTab(){
+		var $know = $('.know_tit2');
+		var $know_a = $know.find('a');		//所有a元素, find方法是效率最高的.
+
+		$know_a.eq(0).data('key','play');		//储存数据
+		$know_a.eq(1).data('key','type');
+		$know_a.eq(2).data('key','buy');
+
+		$know.click(function(e){		//父级监听获取点击的事件效率高很多
+			var $even = $(e.target);		//得到点击的元素
+			var key = $even.data('key');			//得到内置数据,用来辨别哪个层变化
+			 $even.addClass('crt').siblings().removeClass('crt');		//siblings获取同级元素. 效率比先移除所有再添加要高.
+			 $('.know_content2>.'+key).addClass('show').siblings().removeClass('show');	//用">"比用" " 更准确高效.
+			 return false;									//防止内部方法继续执行.(执行置顶跳动)
+		});
+	}
+
+	//html 部分
+	<div id="know">
+		<div class="know_tit">
+			<a href="javascript:void(0)" onclick="toggle(this,'play')" class="crt fcrt">游戏玩法</a>
+			<a href="javascript:void(0)" onclick="toggle(this,'type')" >中奖方式</a>
+			<a href="javascript:void(0)" onclick="toggle(this,'buy')"  >如何购买</a>
+			<br class="clear" />
+		</div>
+		<div class="know_content">
+			<div class="play show">A标签中通过href和onclick传递的this对象.onclick这个this指的就是a这个对象，<br />而使用href的方式时javascript:fun(this)，由于是一个地址，这个this就无处可指了。</div>
+			<div class="type">我总共写了2种实现联动切换的方法.这种方法js代码很少,简单清晰,但html内容增加,另一种就是用jq的绑定事件,js代码会有点繁琐.html简单</div>
+			<div class="buy">此处的show样式,必须要写成.know_content .show{}, 直接写会找不到show这个样式,<br />因为class平级权限的话,第二个的class是无效的，级别为：标签 < class < id .</div>
+		</div>
+	</div>
+	<br />
+	<div id="know2">
+		<div class="know_tit2">
+			<a href="#"  class="crt fcrt">游戏玩法</a>
+		   <a href="#">中奖方式</a>
+		   <a href="#">如何购买</a>
+			<br class="clear" />
+		</div>
+		<div class="know_content2">
+			<div class="play show">A标签中通过href和onclick传递的this对象.onclick这个this指的就是a这个对象，<br />而使用href的方式时javascript:fun(this)，由于是一个地址，这个this就无处可指了。</div>
+			<div class="type">我总共写了2种实现联动切换的方法.这种方法js代码很少,简单清晰,但html内容增加,另一种就是用jq的绑定事件,js代码会有点繁琐.html简单</div>
+			<div class="buy">此处的show样式,必须要写成.know_content .show{}, 直接写会找不到show这个样式,<br />因为class平级权限的话,第二个的class是无效的，级别为：标签 < class < id .</div>
+		</div>
+	</div>
+	</textarea>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

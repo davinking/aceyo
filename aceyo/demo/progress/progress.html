@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>JS状态条 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="小日本的JS状态条" />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/plus.js"></script>
+<script src="progress.js"></script>
+<script>
+$(function(){
+	var p2 = {
+		width: 400,
+		height: 16,
+		from: 10.4,
+		to: 62.8,
+		bar_bgc: "#990000",
+		nd: 1,
+		animation: 1
+	};
+	var o2 = new html5jp.progress("sample2", p2);
+	o2.draw();
+
+	var p1 = {
+		to: 50
+	};
+	var o1 = new html5jp.progress("sample1", p1);
+	o1.draw();
+
+	var p = {
+		to: 50
+	};
+
+//////////////////////////////////////////////////////////////////
+	var o = new html5jp.progress("sample", p);
+	if( ! o ) { return; }
+	o.draw();
+	document.getElementById("set_val").onclick = function() {
+		var val = document.getElementById("val").value;
+		if( isNaN(val) ) { return; }
+		o.set_val(val);
+	};
+	document.getElementById("decr").onclick = function() {
+		o.decr(10);
+	};
+	document.getElementById("incr").onclick = function() {
+		o.incr(10);
+	};
+	document.getElementById("reset").onclick = function() {
+		o.reset();
+		document.getElementById("val").value = "";
+		document.getElementById("animation").value = "5";
+	};
+	document.getElementById("get_val").onclick = function() {
+		alert( o.get_val() );
+	};
+	document.getElementById("get_per").onclick = function() {
+		alert( o.get_per() );
+	};
+	document.getElementById("animation").onchange = function() {
+		o.set_param("animation", document.getElementById("animation").value);
+	};
+});
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>小日本弄的JS状态条.</b>
+	<div style="width:860px;border:1px dashed #4999CB;margin:10px 0;padding:10px;">
+		<div id="sample1"></div>
+		<p>------------------</p>
+		<div id="sample2"></div>
+		<p>------------------</p>
+		<div id="sample3" class="html5jp-progress [width:400;height:16;to:62.4;animation:0;bar_bgc:green;nd:1]"></div>
+		<p>------------------</p>
+		<div id="sample4" class="html5jp-progress [width:400;height:16;to:75.8;animation:0;bar_bgc:orange;nd:1]"></div>
+		<p>------------------</p>
+		<div id="sample"></div>
+		<p>
+			<input type="text" id="val" value="" size="4" />  <span id="set_val" class="button green medium">执行</span>
+		</p>
+		<p>
+			<span id="decr" class="button orange medium">减少10%</span>
+			<span id="incr" class="button orange medium">增加10%</span>
+			速度：
+			<select id="animation">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5" selected="selected">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+		</p>
+		<p>
+			<span id="get_val" class="button red medium">取值</span>
+			<span id="get_per" class="button red medium">百分比</span>
+			<span id="reset" class="button red medium">重置</span>
+		</p>
+	</div>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>无标题文档</title>
+<script language="javascript">
+       
+    var level = 1;
+    var div      ;
+    var timeout  ;     
+
+    document.onclick = function (event){
+        var e     = event || window.event ;
+        div = document.getElementById('mydiv'); 
+        level = 1;
+        if(level === 1){
+            div.style.marginLeft = e.clientX;
+            div.style.marginTop  = e.clientY;  
+            div.style.width      =  '0px';
+            div.style.height     =  '0px';
+            clearTimeout(timeout);
+        } 
+
+        var step = function (){  
+            var width  =  parseInt(div.style.width.substring(0,div.style.width.length -2)) ;
+            var height =  parseInt(div.style.height.substring(0,div.style.height.length -2));
+            
+            var left   =  parseInt(div.style.marginLeft.substring(0,div.style.marginLeft.length-2));
+            var top    =  parseInt(div.style.marginTop.substring(0,div.style.marginTop.length-2));
+            
+            div.style.width  = (width +  4 ) + 'px';
+            div.style.height = (height + 2 ) + 'px';
+
+            div.style.marginLeft = (left - (width+4) /2 +width/2)  + 'px'; 
+            div.style.marginTop  = (top  - (height+2)/2 +height/2) + 'px';
+            if(level <= 50){       
+                level = level +1 ;
+                timeout= setTimeout(step,100);
+            }
+        
+        }
+       timeout = setTimeout(step,10);
+    }
+ 
+</script>
+
+</head>
+
+<body>
+ 
+<div id="mydiv" style="background-color:#99FF00;width:0px;height:0px; position:absolute;"></div>
+ 
+ <div id='d'></div>
+</body>
+</html>
