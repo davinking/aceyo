@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>jQuery 的导航 >> Java就是老大</title>
+<meta name="keywords" content="Java,J2EE,Javascript,CSS,HTML" />
+<meta name="description" content="jQuery 写的导航悬停的Demo, 解决了队列问题" />
+<meta name="Robots" content= "all">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link href="/style.css" rel="stylesheet" />
+<style type="text/css">
+	 /* General */
+	#cssdropdown, #cssdropdown ul {list-style:none;margin:0;padding:0}
+	/* Head links */
+	#cssdropdown .headlink {width:160px;float:left;margin-left:20px;text-align:center; border:1px solid silver;}
+	#cssdropdown .headlink a {display: block;padding:2px;}
+	/* Child lists and links */
+	#cssdropdown .headlink ul {padding-bottom:5px;background: #eee; display:none;text-align:left;}
+	#cssdropdown .headlink ul li{border-bottom:1px white solid;}
+	#cssdropdown .headlink ul li a {padding:5px;line-height:16px;}
+	#cssdropdown .headlink ul li a:hover {background: #fbfcca;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/plus.js"></script>
+<script>
+$(function(){
+		//这个解决了一些bug
+		$('#cssdropdown > li').hover(
+			function(){
+				var nav = $('ul',this);
+				nav.is(':animated')?nav.stop(true,true):null;//
+				nav.delay(200).fadeIn(10);	//悬停400ms后展开导航
+			},function(){
+				var nav = $('ul',this);
+				nav.is(':animated')?null:nav.stop(true,true);	//离开时如果在动画中就取消队列,防止鼠标滑过就展开的bug
+				nav.fadeOut(200);							//离开时收起导航
+		});
+});
+</script>
+</head>
+<body>
+<div id="logo">
+	<img src="/images/logo.png" alt="Logo">
+	<h1>wind's page</h1>
+	<p><em> a zone 4 a coder </em></p>
+</div>
+<div id="header">
+	<div id="menu">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/resume.html">Resume</a></li>
+			<li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/demo.html" class='current'>Demo</a></li>
+			<li><a href="/other.html">Other</a></li>
+		</ul>
+	</div>
+    <div id="search">
+    	<g:plusone href="http://www.aceyo.com" size="medium"></g:plusone><br />
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=562747059&site=qq&menu=yes"><img border="0" width="59" height="16" src="http://wpa.qq.com/pa?p=2:562747059:46" alt="企鹅号" title="企鹅号"></a>
+	</div>
+</div>
+<div id="page">
+	<b>jQuery 写的导航悬停的Demo, 解决了队列问题.</b>
+	<div style="width:860px;height:160px;border:1px dashed #4999CB;margin:10px 0;padding:10px;">
+		<ul id="cssdropdown">
+			<li class="headlink"><a href="javascript:void(0)">Java 就是老大 >></a>
+			 <ul>
+				  <li><a href="http://www.aceyo.com/resume.html">Resume</a></li>
+				  <li><a href="http://www.aceyo.com/gallery.html">Gallery</a></li>
+				  <li><a href="http://www.aceyo.com/demo.html">Demo</a></li>
+				  <li><a href="http://www.aceyo.com/other.html">Other</a></li>
+			 </ul>
+			</li>
+			<li class="headlink"><a href="javascript:void(0)">Google >></a>
+			  <ul>
+				  <li><a href="http://www.aceyo.com/resume.html">Resume</a></li>
+				  <li><a href="http://www.aceyo.com/gallery.html">Gallery</a></li>
+				  <li><a href="http://www.aceyo.com/demo.html">Demo</a></li>
+				  <li><a href="http://www.aceyo.com/other.html">Other</a></li>
+			 </ul>
+		 </li>
+		 <li class="headlink"><a href="javascript:void(0)">Microsoft >></a>
+			  <ul>
+				  <li><a href="http://www.aceyo.com/resume.html">Resume</a></li>
+				  <li><a href="http://www.aceyo.com/gallery.html">Gallery</a></li>
+				  <li><a href="http://www.aceyo.com/demo.html">Demo</a></li>
+				  <li><a href="http://www.aceyo.com/other.html">Other</a></li>
+			 </ul>
+		 </li>
+		</ul>
+	</div>
+	<a href="javascript:void(0)" class="button red medium" onclick="$('textarea').select();">复制代码</a>
+	<textarea readonly style="width:880px;height:450px;border:1px dashed #4999CB;">
+	//css部分
+	 /* General */
+	#cssdropdown, #cssdropdown ul {list-style:none;margin:0;padding:0}
+	/* Head links */
+	#cssdropdown .headlink {width:160px;float:left;margin-left:20px;text-align:center; border:1px solid silver;}
+	#cssdropdown .headlink a {display: block;padding:10px;}
+	/* Child lists and links */
+	#cssdropdown .headlink ul {padding-bottom:5px;background: #eee; display:none;text-align:left;}
+	#cssdropdown .headlink ul li{border-bottom:1px white solid;}
+	#cssdropdown .headlink ul li a {padding:5px;line-height:16px;}
+	#cssdropdown .headlink ul li a:hover {background: #fbfcca;}
+	//js 部分
+	$(function(){
+		//这个解决了一些bug
+		$('#cssdropdown > li').hover(
+			function(){
+				var nav = $('ul',this);
+				nav.is(':animated')?nav.stop(true,true):null;//
+				nav.delay(300).fadeIn(10);	//悬停400ms后展开导航
+			},function(){
+				var nav = $('ul',this);
+				nav.is(':animated')?null:nav.stop(true,true);	//离开时如果在动画中就取消队列,防止鼠标滑过就展开的bug
+				nav.fadeOut(300);							//离开时收起导航
+		});
+	});
+	//html 部分
+	<ul id="cssdropdown">
+		<li class="headlink"><a href="javascript:void(0)">Java 就是老大 >></a>
+		 <ul>
+			  <li><a href="http://www.aceyo.com/resume.html">Resume</a></li>
+			  <li><a href="http://www.aceyo.com/gallery.html">Gallery</a></li>
+			  <li><a href="http://www.aceyo.com/demo.html">Demo</a></li>
+			  <li><a href="http://www.aceyo.com/other.html">Other</a></li>
+		 </ul>
+		</li>
+	</ul>
+		</textarea>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Aceyo.com. All rights reserved. <br /><img src="http://new.cnzz.com/v1/images/icon/icon.gif" border="0"> <script src="http://s23.cnzz.com/stat.php?id=3684523&web_id=3684523&online=1&show=line"></script></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html><head>
+<title></title>
+<style type="text/css">
+html,body{
+width:100%;
+height:100%;
+border:0px;
+margin:0px;
+overflow:hidden;
+}
+#menu{
+width:1000px;
+height:500px;
+overflow:hidden;
+background:lightblue;
+}
+.page{
+position:absolute;
+width:300px;
+height:400px;
+left:350px;
+top:50px;
+background:#FFF;
+border:1px solid #999;
+}
+ul{
+list-style:none;
+height:320px;
+margin:20px;
+padding:0px;
+background:#EEE;
+}
+li{
+font-size:12px;
+height:20px;
+line-height:20px;
+border-bottom:1px dashed #999;
+}
+li span{
+float:right;
+}
+li a{
+color:#000;
+text-decoration:none;
+}
+li a:hover{
+text-decoration:underline;
+}
+.tip{
+display:block;
+height:20px;
+margin:0px 20px;
+line-height:20px;
+text-align:center;
+font-size:12px;
+background:#999;
+}
+</style>
+</head>
+<body>
+<script type="text/javascript">
+function id(obj){
+	return document.getElementById(obj);
+}
+var page;
+var mx;
+var md=false;
+var sh=0;
+var en=false;
+window.onload=function(){
+	page=id("menu").getElementsByTagName("div");
+	if(page.length>0){
+		page[0].style.zIndex=2;
+	}
+	for(i=0;i<page.length;i++){
+		page[i].innerHTML+="<span class=\"tip\">"+(i+1)+"/"+page.length+"页 拖拽翻页</span>";
+		page[i].id="page"+i;
+		page[i].i=i;
+		page[i].onmousedown=function(e){
+			if(!en){
+				if(!e){e=e||window.event;}
+				ex=e.pageX?e.pageX:e.x;
+				mx=350-ex;
+				this.style.cursor="move";
+				md=true;
+				if(document.all){
+					this.setCapture();
+				}else{
+					window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+				}
+			}
+		}
+		page[i].onmousemove=function(e){
+			if(md){
+				en=true;
+				if(!e){e=e||window.event;}
+				ex=e.pageX?e.pageX:e.x;
+				this.style.left=ex+mx+"px";
+				if(this.offsetLeft<350){
+					var cu=(this.i==0)?page.length-1:this.i-1;
+					page[sh].style.zIndex=0;
+					page[cu].style.zIndex=1;
+					this.style.zIndex=2;
+					sh=cu;
+				}
+				if(this.offsetLeft>350){
+					var cu=(this.i==page.length-1)?0:this.i+1;
+					page[sh].style.zIndex=0;
+					page[cu].style.zIndex=1;
+					this.style.zIndex=2;
+					sh=cu;
+				}
+			}
+		}
+		page[i].onmouseup=function(){
+			this.style.cursor="default";
+			md=false;
+			if(this.offsetLeft==350){
+				en=false;
+			}
+			if(document.all){
+				this.releaseCapture();
+			}else{
+				window.releaseEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+			}
+			flyout(this);
+		}
+	}
+}
+function flyout(obj){
+	if(obj.offsetLeft < 350){
+		if( (obj.offsetLeft - 10) > 50 ){
+			obj.style.left=obj.offsetLeft - 10 + "px";
+			window.setTimeout("flyout(id('"+obj.id+"'));",0);
+		}else{
+			obj.style.left= 50 +"px";
+			obj.style.zIndex=0;
+			flyin(id(obj.id));
+		}
+	}
+	if(obj.offsetLeft > 350){
+		if((obj.offsetLeft + 10) < 650){
+			obj.style.left=obj.offsetLeft + 10 + "px";
+			window.setTimeout("flyout(id('"+obj.id+"'));",0);
+		}else{
+			obj.style.left= 650 + "px";
+			obj.style.zIndex=0;
+			flyin(id(obj.id));
+		}
+	}
+}
+function flyin(obj){
+	if(obj.offsetLeft<350){
+		if((obj.offsetLeft + 10) < 350){
+			obj.style.left=obj.offsetLeft + 10+"px";
+			window.setTimeout("flyin(id('"+obj.id+"'));",0);
+		}else{
+			obj.style.left= 350 +"px";
+			en=false;
+		}
+	}
+	if(obj.offsetLeft>350){
+		if((obj.offsetLeft - 10) > 350){
+			obj.style.left=obj.offsetLeft - 10 +"px";
+			window.setTimeout("flyin(id('"+obj.id+"'));",0);
+		}else{
+			obj.style.left=350+"px";
+			en=false;
+		}
+	}
+}
+</script>
+<div id="menu">
+<div class="page" style="cursor: default; z-index: 0; left: 350px; " id="page0">
+<ul>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">伴侣</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">美丽岛</a></li>
+<li style="background:coral;"><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">舞女</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">手牵手</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">初恋的少年家</a></li>
+</ul>
+<span class="tip">1/3页 拖拽翻页</span></div>
+<div class="page" id="page1" style="cursor: default; z-index: 0; left: 350px; ">
+<ul>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">啊！停不住的爱人</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">网路</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">倾城之雨</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">往事2000</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">绿色恐怖分子</a></li>
+</ul>
+<span class="tip">2/3页 拖拽翻页</span></div>
+<div class="page" id="page2" style="cursor: default; left: 350px; z-index: 1; ">
+<ul>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">时光在慢慢消失</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">宁静温泉</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">变天着花</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">阿辉饲了一只狗</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">真的假的</a></li>
+<li><span>09-11-25</span><a href="http://www.oern.cn" _fcksavedurl="http://www.oern.cn" target="_blank">南台湾仔共</a></li>
+</ul>
+<span class="tip">3/3页 拖拽翻页</span></div>
+</div>
+
+</body></html>

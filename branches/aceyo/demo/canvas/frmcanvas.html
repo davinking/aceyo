@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>Java就是老大</title>
+<style type='text/css'>
+body div{float:left;}
+canvas {
+	border:1px solid #4c4c4c;font-size:12px;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!--[if IE]><script type="text/javascript" src="excanvas.compiled.js"></script><![endif]-->
+<script type="text/javascript" src="canvas.js"></script>
+<script>
+$(function() {
+	//这个花圈的方法的div不能float,有bug.
+	var cg = new html5jp.graph.circle("sample");	 //读取id
+	if( ! cg ) { return; }
+		var items = [
+			["sample01", 150, "#ff8899"],
+			["sample02", 100],
+			["sample03", 80],
+			["sample04", 60],
+			["sample05", 30],
+			["sample06", 20],
+			["sample07", 10],
+			["sample08", 10],
+			["sample09", 10],
+			["sample10", 10],
+			["sample11", 10],
+			["sample12", 10]
+		];		//一次加载的数据 [名称, 数量, 颜色]
+		var params = {
+			backgroundColor: "#eeffee",	 //背景色
+			//shadow: false,			//饼型的阴影
+			//captionNum: false,	//数量
+			//startAngle: -45,			//开始角度
+			otherCaption: "其他数据"
+		};	//后期加载的数据
+		cg.draw(items, params);	//画图.
+		//cg.draw(items);
+
+
+
+//////////////////////**曲线图**////////////////////////////////
+	var lg = new html5jp.graph.line("sample4");
+	if( ! lg ) { return; }
+	var items = [
+		["商品A", 20, 58, 40, 14, 38, 20, 40],
+		["商品B", 10, 14, 58, 80, 70, 90, 20]
+	];
+	var params = {
+		x: ["五行", "日", "月", "火", "水", "木", "金", "土"],
+		y: ["数值", 0, 20, 40, 60, 80, 100],
+		yMax: 100,		//y轴最大数
+		yMin: 0,			//最小数
+		lineWidth: [1,2],	 //线宽 , 第一个代表 商品A, 2代表 商品B ,以此类推
+		dotRadius: [3,4],
+		dotType: ["disc", "square"]
+	};
+	lg.draw(items, params);
+
+//////////////////////****////////////////////////////////
+	var lg2 = new html5jp.graph.line("sample5");
+	if( ! lg2 ) { return; }
+	var items2 = [
+		["商品A", 20, 58, 40, 14, 38, 20, 40],
+		["商品B", 10, 14, 58, 80, 70, 90, 20]
+	];
+	lg2.draw(items2);
+
+//////////////////////**原型线图**////////////////////////////////
+
+	var rc = new html5jp.graph.radar("sample6");
+	if( ! rc ) { return; }
+	var items = [
+		["商品A", 5, 2, 4, 5, 3, 2, 4, 4],
+		["商品B", 3, 4, 3, 4, 5, 4, 5, 1]
+	];
+	var params = {
+		aCap: ["汽车", "火车", "飞机", "坦克", "自行车", "步行", "背着", "躺着"]
+	}
+	rc.draw(items, params);
+
+//////////////////////****////////////////////////////////
+	var rc2 = new html5jp.graph.radar("sample7");
+	if( ! rc2 ) { return; }
+	var items2 = [
+		["商品A", 5, 2, 4, 5, 3, 2, 4, 4],
+		["商品B", 3, 4, 3, 4, 5, 4, 5, 1]
+	];
+	var params2 = {
+		aCap: ["安全", "性能", "力量", "人气", "能力", "寿命", "劲道", "强度"],
+		aMax: 6,
+		aMin: 0,
+		chartShape: "circle",
+		faceColors: ["green", "olive"],
+		aLinePositions: [0,1,2,3,4,5,6]
+	};
+	rc2.draw(items2, params2);
+
+//////////////////////****////////////////////////////////
+
+	var g = new html5jp.graph.vbar("sample8");
+	if( ! g ) { return; }
+	var items = [
+		["商品A", 20, 58, 40, 14, 38, 20, 40],
+		["商品B", 10, 14, 58, 80, 70, 90, 20],
+		["商品C", 10, 14, 58, 80, 70, 90, 20],
+		["商品D", 10, 14, 58, 80, 70, 90, 20],
+		["商品E", 10, 14, 58, 80, 70, 90, 20]
+	];	
+	var params = {
+		x: ["五行", "日", "月", "火", "水", "木", "金", "土"],
+		y: ["数值"],
+		barShape: "cylinder"   //圆柱形
+		//yMax: 100				//y轴最高数
+	};
+	g.draw(items, params);
+
+//////////////////////****////////////////////////////////
+
+	var g = new html5jp.graph.vbar("sample9");
+	if( ! g ) { return; }
+	var items = [
+		["商品A", 20, 58, 40, 14, 38, 20, 40],
+		["商品B", 10, 14, 58, 80, 70, 90, 20],
+		["商品C", 10, 14, 58, 80, 70, 90, 20],
+		["商品D", 10, 14, 58, 80, 70, 90, 20],
+		["商品E", 10, 14, 58, 80, 70, 90, 20]
+	];	
+	var params = {
+		x: ["五行", "日", "月", "火", "水", "木", "金", "土"],
+		y: ["数值"],
+		barShape: "flat"			//立体柱形
+
+	};
+	g.draw(items, params);
+
+//////////////////////****////////////////////////////////
+
+	var g = new html5jp.graph.vbar("sample10");
+	if( ! g ) { return; }
+	var items = [
+		["商品A", 20, 58, 40, 14, 38, 20, 40],
+		["商品B", 10, 14, 58, 80, 70, 90, 20],
+		["商品C", 10, 14, 58, 80, 70, 90, 20],
+		["商品D", 10, 14, 58, 80, 70, 90, 20],
+		["商品E", 10, 14, 58, 80, 70, 90, 20]
+	];	
+	var params = {
+		x: ["五行", "日", "月", "火", "水", "木", "金", "土"],
+		y: ["数值"],
+		barShape: "line"		//平面行
+	};
+	g.draw(items, params);
+});
+WebFontConfig = {
+    google: { families: [ 'Eater::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); 
+</script>
+</head>
+<body>
+<div><canvas width="400" height="300" id="sample"></canvas></div>
+<div><canvas width="400" height="300" id="sample4"></canvas></div>
+<div><canvas width="400" height="300" id="sample5"></canvas></div>
+<div><canvas width="400" height="300" id="sample6"></canvas></div>
+<div><canvas width="400" height="300" id="sample7"></canvas></div>
+<div><canvas width="400" height="300" id="sample8"></canvas></div>
+<div><canvas width="400" height="300" id="sample9"></canvas></div>
+<div><canvas width="400" height="300" id="sample10"></canvas></div>
+<br style='clear:both' />
+</body>
+</html>
