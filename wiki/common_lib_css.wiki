@@ -73,5 +73,7 @@ FF不能识别*，但能识别!important;
 
 另外再补充一个，下划线"_"，
 IE6支持下划线，IE7和firefox均不支持下划线。(推荐)
+
+要解决chrome中最小字体为12px的问题，可以使用Webkit 的内核 -webkit-text-size-adjust 的私有属性来解决，比如下面的代码就可以成功的解决，简单有效，通过- webkit-text-size-adjust即可实现字体大小不随终端设备或浏览器影响。
 }}}
 https://github.com/necolas/normalize.css 这个东西要看看
