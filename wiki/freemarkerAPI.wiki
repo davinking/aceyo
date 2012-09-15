@@ -567,8 +567,16 @@ hash?values
 freemarker与webwork整合
 web中常用的几个对象
 Freemarker的ftl文件中直接使用内部对象:
+
+url?id=12 方式传参
+${Parameters.id} 
+或 
+${Parameters['id']}
+或
+${request.getParameter('id')}
+
 ${Request ["a"]}
-${RequestParameters["a"]}
+${RequestParameters["a"]} //有问题
 ${Session ["a"]}
 ${Application ["a"]}
 ${JspTaglibs ["a"]}
